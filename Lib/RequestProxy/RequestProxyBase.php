@@ -1,14 +1,16 @@
 <?php
 /**
- * Copyright 2010, Cake Development Corporation (http://cakedc.com)
+ * Copyright 2010-2012, Cake Development Corporation (http://cakedc.com)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright Copyright 2010, Cake Development Corporation (http://cakedc.com)
+ * @copyright Copyright 2010-2012, Cake Development Corporation (http://cakedc.com)
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
+App::uses('Signature', 'OauthLib.Lib');
+ 
 /**
  * Request proxy base class
  * 
@@ -234,7 +236,11 @@ class RequestProxyBase {
 		$headers = array(
 			'X-HTTP_AUTHORIZATION', 'authorization', 'Authorization', 'HTTP_AUTHORIZATION',
 			'HTTP_HTTP_AUTHORIZATION', 'HTTP_X-HTTP_AUTHORIZATION');
-		$params = apache_request_headers();
+		if (function_exists('apache_request_headers')) {
+			$params = apache_request_headers();
+		} else {
+			$params =  array();
+		}
 		foreach ($headers as $header) {
 			$header = env($header);
 			if (!$header) {

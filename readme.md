@@ -99,7 +99,6 @@ All versions are updated with security patches.
 
 Please feel free to contribute to the plugin with new issues, requests, unit tests and code fixes or new features. If you want to contribute some code, create a feature branch from develop, and send us your pull request. Unit tests for new features and issues detected are mandatory to keep quality high. 
 
-
 ## License ##
 
 Copyright 2009-2010, [Cake Development Corporation](http://cakedc.com)

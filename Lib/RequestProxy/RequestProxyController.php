@@ -1,11 +1,11 @@
 <?php
 /**
- * Copyright 2010, Cake Development Corporation (http://cakedc.com)
+ * Copyright 2010-2012, Cake Development Corporation (http://cakedc.com)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright Copyright 2010, Cake Development Corporation (http://cakedc.com)
+ * @copyright Copyright 2010-2012, Cake Development Corporation (http://cakedc.com)
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
@@ -19,6 +19,7 @@ if (!class_exists('RequestFactory')) {
 RequestFactory::register('OauthLibAppController', 'RequestProxyController');
 RequestFactory::register('OauthAppController', 'RequestProxyController');
 RequestFactory::register('AppController', 'RequestProxyController');
+RequestFactory::register('OauthDispatcherFilter', 'RequestProxyController'); 
 
 /**
  * Request proxy controller class. Provide access to request coming to the controller
@@ -106,7 +107,10 @@ class RequestProxyController extends RequestProxyBase {
  * @return string
  */
 	private function __queryParams() {
-		$params = $this->request->params['url'];
+		$params = array();
+		if (isset($this->request->request->params['url'])) {
+			$params = $this->request->request->params['url'];
+		}
 		unset($params['url']);
 		unset($params['ext']);
 		return $params;
@@ -118,9 +122,9 @@ class RequestProxyController extends RequestProxyBase {
  * @return string
  */
 	private function __requestParams() {
-		if (empty($this->request->data)) {
+		if (empty($this->request->request->data)) {
 			return array();
 		}
-		return $this->request->data;
+		return $this->request->request->data;
 	}
 }

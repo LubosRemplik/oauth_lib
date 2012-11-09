@@ -1,11 +1,11 @@
 <?php 
 /**
- * Copyright 2010, Cake Development Corporation (http://cakedc.com)
+ * Copyright 2010-2012, Cake Development Corporation (http://cakedc.com)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright Copyright 2010, Cake Development Corporation (http://cakedc.com)
+ * @copyright Copyright 2010-2012, Cake Development Corporation (http://cakedc.com)
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
@@ -145,6 +145,20 @@ class URI {
 			$this->process($new_uri);
 		}
 	}
+	
+	public function toArray() {
+		return array(
+			'scheme' => $this->scheme, 
+			'host' => $this->host, 
+			'port' => $this->port, 
+			'user' => $this->user, 
+			'pass' => $this->pass, 
+			'path' => $this->path, 
+			'dir' => $this->dir, 
+			'query' => $this->query, 
+			'fragment' => $this->fragment);
+	}
+	
 	
 /**
  * Parse the URI, return false on error

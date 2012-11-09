@@ -1,17 +1,18 @@
 <?php
 /**
- * Copyright 2010, Cake Development Corporation (http://cakedc.com)
+ * Copyright 2010-2012, Cake Development Corporation (http://cakedc.com)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright Copyright 2010, Cake Development Corporation (http://cakedc.com)
+ * @copyright Copyright 2010-2012, Cake Development Corporation (http://cakedc.com)
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
 App::uses('RequestFactory', 'OauthLib.Lib');
 App::uses('ClientHttp', 'OauthLib.Lib');
-App::uses('HttpSocket', 'OauthLib.Vendor');
+			App::uses('HttpSocket', 'Network/Http');
+			// App::uses('HttpSocket', 'OauthLib.Vendor');
 App::uses('RequestProxyController', 'OauthLib.RequestProxy');
 App::uses('Consumer', 'OauthLib.Lib');
 App::uses('ConsumerToken', 'OauthLib.Token');
@@ -41,7 +42,8 @@ class ClientHttpTest extends OauthTestCase {
 		$this->timestamp = "1199645624";
 		$config = array('host' => 'example.com', 'request' => array('uri' => array('host' => 'example.com')));
 		$this->http = new HttpSocket($config);
-		$this->requestUriN = $this->http->parseUri('http://example.com/test?key=value');
+		//$this->requestUriN = $this->http->parseUri('http://example.com/test?key=value');
+		$this->requestUriN = OauthHelper::parseUri('http://example.com/test?key=value');
 	}
 
 /**

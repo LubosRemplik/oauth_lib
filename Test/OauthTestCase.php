@@ -1,11 +1,11 @@
 <?php
 /**
- * Copyright 2010, Cake Development Corporation (http://cakedc.com)
+ * Copyright 2010-2012, Cake Development Corporation (http://cakedc.com)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright Copyright 2010, Cake Development Corporation (http://cakedc.com)
+ * @copyright Copyright 2010-2012, Cake Development Corporation (http://cakedc.com)
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
@@ -68,4 +68,5 @@ class OauthTestCase extends CakeTestCase {
 		App::uses('RequestFactory', 'OauthLib.Lib');
 		return RequestFactory::proxy(new MockObject(array('parameters' => $params, 'method' => $method, 'uri' => $uri)));
 	}
+
 }

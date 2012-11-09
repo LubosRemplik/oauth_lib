@@ -1,16 +1,18 @@
 <?php
 /**
- * Copyright 2010, Cake Development Corporation (http://cakedc.com)
+ * Copyright 2010-2012, Cake Development Corporation (http://cakedc.com)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright Copyright 2010, Cake Development Corporation (http://cakedc.com)
+ * @copyright Copyright 2010-2012, Cake Development Corporation (http://cakedc.com)
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
 if (!class_exists('HttpSocket')) {
-	App::uses('HttpSocket', 'OauthLib.Vendor');
+			App::uses('HttpSocketProxy', 'OauthLib.Lib/Network/Http');
+			App::uses('HttpSocket', 'Network/Http');
+			// App::uses('HttpSocket', 'OauthLib.Vendor');
 }
 if (!class_exists('ClientHttp')) {
 	App::uses('ClientHttp', 'OauthLib.Lib');
@@ -93,7 +95,9 @@ class RequestProxyHttp extends RequestProxyBase {
 		if (substr($query, 0, 1) == '?') {
 			$query = substr($query, 1);
 		}
-		$requestParams = HttpSocket::parseQuery($query);
+		$proxy = new HttpSocketProxy(new HttpSocket);
+		
+		$requestParams = $proxy->parseQuery($query);
 		foreach($requestParams as $k => $v) {
 			if (!is_array($requestParams[$k])) {
 				$requestParams[$k] = array($requestParams[$k]);
